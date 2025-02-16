@@ -105,17 +105,21 @@ namespace Ecommerce.Controllers
                 user.Image = uniqueFileName;
             }
 
-           
-              
-              
-                
-             
-            
+
+
+            // ✅ Agar new password aya hai toh hash karo, warna purana password rakho
+            if (!string.IsNullOrEmpty(editDTO.Password))
+            {
+                user.Password = _passwordHasher.HashPassword(user, editDTO.Password);
+            }
+
+
+
 
             user.Name = editDTO.Name;
             user.Email = editDTO.Email;
             user.PhoneNumber = editDTO.PhoneNumber;
-            user.Password = _passwordHasher.HashPassword(user, editDTO.Password);
+          
 
             user.UpdateDate = DateTime.Now;
 
